@@ -22,9 +22,9 @@ class TestBase(LiveServerTestCase):
         """Setup the test driver and create test users"""
         print("--------------------------NEXT-TEST----------------------------------------------")
         chrome_options = Options()
-        chrome_options.binary_location = r"/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+        chrome_options.binary_location = "/usr/bin/chromium-browser"
         chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(executable_path="/Users/harryvolker/Documents/QA/20NovDevOps/chromedriver", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="/home/Harry/chromedriver", chrome_options=chrome_options)
         self.driver.get("http://localhost:5000")
         db.session.commit()
         db.drop_all()
