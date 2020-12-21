@@ -2,6 +2,7 @@
 sudo apt-get update
 
 # Install application to /opt/
+sudo rm -r /opt/todo-list
 sudo mkdir /opt/todo-list
 sudo cp -r . /opt/todo-list
 
