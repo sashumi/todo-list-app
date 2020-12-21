@@ -13,5 +13,4 @@ pip3 install -r requirements.txt
 pip3 install pytest pytest-cov
 
 # Run pytest
-mkdir junit
-pytest --cov=application --cov-report html --junitxml=junit
+pytest --cov=application --cov-report html --junitxml
