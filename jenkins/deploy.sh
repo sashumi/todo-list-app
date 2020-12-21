@@ -14,7 +14,7 @@ Description=Todo List
 User=jenkins
 Environment=DATABASE_URI=$DATABASE_URI
 Environment=SECRET_KEY=$SECRET_KEY
-ExecStart=/bin/bash /opt/todo-list/startup.sh
+ExecStart=/bin/bash /opt/todo-list/jenkins/startup.sh
 
 [Install]
 WantedBy=multi-user.target
