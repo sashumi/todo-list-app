@@ -25,6 +25,6 @@ EOF
 sudo cp todo-list.service /etc/systemd/system/todo-list.service
 
 # systemd reload/start/stop
-sudo systemctl stop todo-list
 sudo systemctl daemon-reload
+sudo systemctl stop todo-list
 sudo systemctl start todo-list
