@@ -1,34 +1,27 @@
-# Import the necessary modules
 import unittest
 from flask import url_for
 from flask_testing import TestCase
 
-# import the app's classes and objects
 from application import app, db
 from application.models import Tasks
 
-# Create the base class
 class TestBase(TestCase):
     def create_app(self):
-
-        # Pass in testing configurations for the app. Here we use sqlite without a persistent database for our tests.
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
-                SECRET_KEY='TEST_SECRET_KEY',
-                DEBUG=True
-                )
+        app.config.update(
+            SQLALCHEMY_DATABASE_URI="sqlite:///",
+            SECRET_KEY='TEST_SECRET_KEY',
+            DEBUG=True
+        )
         return app
 
     def setUp(self):
         """
         Will be called before every test
         """
-        # Create table
         db.create_all()
 
-        # Create test registree
         task1 = Tasks(description="My First Task")
 
-        # save users to database
         db.session.add(task1)
         db.session.commit()
 
@@ -36,11 +29,9 @@ class TestBase(TestCase):
         """
         Will be called after every test
         """
-
         db.session.remove()
         db.drop_all()
 
-# Write a test class for testing that the home page loads but we are not able to run a get request for delete and update routes.
 class TestViews(TestBase):
     def test_home_get(self):
         response = self.client.get(url_for('home'))
@@ -71,6 +62,22 @@ class TestUpdate(TestBase):
             follow_redirects=True
         )
         self.assertIn(b'Updated task',response.data)
+    
+    def test_complete_get(self):
+        response = self.client.post(
+            url_for('complete', id=1),
+            follow_redirects = True
+        )
+        task = Tasks.query.filter_by(id=1).first()
+        self.assertEqual(task.completed,True)
+
+    def test_incomplete_get(self):
+        response = self.client.post(
+            url_for('incomplete', id=1),
+            follow_redirects = True
+        )
+        task = Tasks.query.filter_by(id=1).first()
+        self.assertEqual(task.completed,False)
 
 class TestDelete(TestBase):
     def test_delete_post(self):
