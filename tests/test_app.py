@@ -42,7 +42,6 @@ class TestBase(TestCase):
 
 # Write a test class for testing that the home page loads but we are not able to run a get request for delete and update routes.
 class TestViews(TestBase):
-
     def test_home_get(self):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code,200)
@@ -55,32 +54,28 @@ class TestViews(TestBase):
         response = self.client.get(url_for('delete', id=1), follow_redirects=True)
         self.assertEqual(response.status_code,200)
 
-# # Test adding 
-# class TestAdd(TestBase):
-#     def test_add_post(self):
-#         response = self.client.post(
-#             url_for('home'),
-#             data = dict(name="MrMan")
-#         )
+class TestAdd(TestBase):
+    def test_add_post(self):
+        response = self.client.post(
+            url_for('create'),
+            data = dict(description="New task"),
+            follow_redirects = True
+        )
+        self.assertIn(b'New task',response.data)
 
-#         self.assertIn(b'MrMan',response.data)
+class TestUpdate(TestBase):
+    def test_update_post(self):
+        response = self.client.post(
+            url_for('update', id=1),
+            data = dict(description="Updated task"),
+            follow_redirects=True
+        )
+        self.assertIn(b'Updated task',response.data)
 
-# # Test updating
-# class TestUpdate(TestBase):
-#     def test_update_post(self):
-#         response = self.client.post(
-#             url_for('update'),
-#             data = dict(oldname="MissWoman", newname="MissLady"),
-#             follow_redirects=True
-#             )
-#         self.assertEqual(response.status_code,200)
-
-# # Test Deleting
-# class TestDelete(TestBase):
-#     def test_delete_post(self):
-#         response = self.client.post(
-#             url_for('delete'),
-#             data = dict(name="MissWoman"),
-#             follow_redirects=True
-#             )
-#         self.assertEqual(response.status_code,200)
+class TestDelete(TestBase):
+    def test_delete_post(self):
+        response = self.client.get(
+            url_for('delete', id=1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b'New task',response.data)
