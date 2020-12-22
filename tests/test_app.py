@@ -64,17 +64,17 @@ class TestUpdate(TestBase):
         self.assertIn(b'Updated task',response.data)
     
     def test_complete_get(self):
-        response = self.client.post(
+        response = self.client.get(
             url_for('complete', id=1),
-            follow_redirects = True
+            follow_redirects=True
         )
         task = Tasks.query.filter_by(id=1).first()
         self.assertEqual(task.completed,True)
 
     def test_incomplete_get(self):
-        response = self.client.post(
+        response = self.client.get(
             url_for('incomplete', id=1),
-            follow_redirects = True
+            follow_redirects=True
         )
         task = Tasks.query.filter_by(id=1).first()
         self.assertEqual(task.completed,False)
