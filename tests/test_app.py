@@ -45,6 +45,10 @@ class TestViews(TestBase):
         response = self.client.get(url_for('delete', id=1), follow_redirects=True)
         self.assertEqual(response.status_code,200)
 
+    def test_create_get(self):
+        response = self.client.get(url_for('create'))
+        self.assertEqual(response.status_code,200)
+
 class TestAdd(TestBase):
     def test_add_post(self):
         response = self.client.post(
