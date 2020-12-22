@@ -15,12 +15,6 @@ class TestBase(LiveServerTestCase):
         app.config['SQLALCHEMY_DATABASE_URI'] = getenv("TEST_DATABASE_URI")
         app.config['SECRET_KEY'] = getenv("TEST_SECRET_KEY")
         app.config['LIVESERVER_PORT'] = 5001
-
-class TestBase(LiveServerTestCase):
-
-    def create_app(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
-        app.config['SECRET_KEY'] = "aodjiwjdoiwja"
         return app
 
     def setUp(self):
