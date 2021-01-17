@@ -5,14 +5,8 @@ services:
     image: ${AUTHOR}/todo-app:${VERSION}
     build: .
     environment:
-      DATABASE_URI: mysql+pymysql://root:${DB_PASSWORD}@todo-db:3306/todo_db
+      DATABASE_URI: sqlite:///data.db
       SECRET_KEY: ${SECRET_KEY}
     ports:
     - target: 5000
       published: 80
-  mysql:
-    container_name: todo-db
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: todo_db
