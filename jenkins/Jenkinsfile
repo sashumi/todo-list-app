@@ -1,0 +1,34 @@
+pipeline{
+    agent any
+    environment{
+        VERSION = "1.${BUILD_ID}"
+        TEST_DATABASE_URI = "sqlite:///data.db"
+        TEST_SECRET_KEY = "test"
+        CHROMEDRIVER_PATH = "/home/jenkins/chromedriver"
+        AUTHOR = credentials("AUTHOR")
+        SECRET_KEY = credentials("SECRET_KEY")
+    }
+    stages{
+        stage("Test"){
+            steps{
+                sh "bash jenkins/test.sh"
+            }
+        }
+        stage("Build and Push Images"){
+            steps{
+                sh "bash jenkins/build_images.sh"
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh "bash jenkins/deploy_compose.sh"
+            }
+        }
+    }
+    post {
+        always {
+            junit 'junit.xml'
+            cobertura coberturaReportFile: 'coverage.xml', failNoReports: false
+        }
+    }
+}
