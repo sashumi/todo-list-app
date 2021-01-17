@@ -34,7 +34,6 @@ The following are set by default:
 
 And these need to be defined using Jenkins Credentials:
 - `AUTHOR` should be set to your Docker Hub username
-- `DB_PASSWORD` should be set to a secure password
 - `SECRET_KEY` should be set to a secure key
 
 The instructions for each pipeline step are defined in separate `bash` scripts. The testing stage requires the use of `sudo` commands to install the required software dependencies, and so the `jenkins` user must be given `sudo` privileges to run the following:
