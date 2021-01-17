@@ -34,6 +34,7 @@ class TestBase(LiveServerTestCase):
         print("--------------------------END-OF-TEST----------------------------------------------\n\n\n-------------------------UNIT-AND-SELENIUM-TESTS----------------------------------------------")
 
     def test_server_is_up_and_running(self):
+        time.sleep(5)
         response = urlopen("http://localhost:5001")
         self.assertEqual(response.code, 200)
 
