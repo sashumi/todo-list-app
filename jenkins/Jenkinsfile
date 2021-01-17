@@ -1,0 +1,30 @@
+pipeline{
+    agents any
+    environment{
+        VERSION = "1.${BUILD_ID}"
+        LOCATION = ""
+        AUTHOR = "htrvolker"
+        TEST_DATABASE_URI = "sqlite:///"
+        TEST_SECRET_KEY = "test"
+        CHROMEDRIVER_PATH = "/home/jenkins/chromedriver"
+        DB_PASSWORD = credentials("DB_PASSWORD")
+        SECRET_KEY = credentials("SECRET_KEY")
+    }
+    stages{
+        stage("Test"){
+            steps{
+                sh "bash jenkins/test.sh"
+            }
+        }
+        stage("Build and Push Images"){
+            steps{
+                sh "bash jenkins/build_images.sh"
+            }
+        }
+        stage("Deploy"){
+            steps{
+                sh "bash jenkins/deploy_compose.sh"
+            }
+        }
+    }
+}
