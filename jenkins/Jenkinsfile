@@ -1,5 +1,5 @@
 pipeline{
-    agents any
+    agent any
     environment{
         VERSION = "1.${BUILD_ID}"
         LOCATION = ""
