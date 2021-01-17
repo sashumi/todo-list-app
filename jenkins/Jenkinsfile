@@ -4,7 +4,7 @@ pipeline{
         VERSION = "1.${BUILD_ID}"
         LOCATION = ""
         AUTHOR = "htrvolker"
-        TEST_DATABASE_URI = "sqlite:///"
+        TEST_DATABASE_URI = "sqlite:///data.db"
         TEST_SECRET_KEY = "test"
         CHROMEDRIVER_PATH = "/home/jenkins/chromedriver"
         DB_PASSWORD = credentials("DB_PASSWORD")
