@@ -11,10 +11,18 @@ cat << EOF > todo-list.service
 Description=Todo List
 
 [Service]
-User=jenkins
-Environment=DATABASE_URI=$DATABASE_URI
-Environment=SECRET_KEY=$SECRET_KEY
-ExecStart=/bin/bash /opt/todo-list/jenkins/startup.sh
+# Systemd service configuration here
+# You'll need to set these environment variables:
+#     DATABASE_URI
+#     SECRET_KEY
+# 
+# Use the jenkins/setup.sh script to start the app
+# 
+# Attach the user either to jenkins or (preferably) 
+# dedicated service user, e.g. pythonadm
+# ----------------------------------
+# Configuration here!
+# ----------------------------------
 
 [Install]
 WantedBy=multi-user.target
