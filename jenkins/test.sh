@@ -19,4 +19,6 @@ pip3 install -r requirements.txt
 pip3 install pytest pytest-cov
 
 # Run pytest
-pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
+#pytest --cov=application --cov-report xml --cov-report term-missing --junitxml junit.xml
+python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
+
