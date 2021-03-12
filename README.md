@@ -33,6 +33,8 @@ The following are set by default:
 - `CHROMEDRIVER_PATH` defines where the `chromedriver` will be installed and is set to `/home/jenkins/chromedriver`
 
 And these need to be defined using Jenkins Credentials:
+
+test jenkins CI/CD
 - `AUTHOR` should be set to your Docker Hub username
 - `SECRET_KEY` should be set to a secure key
 
